@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>眼睛顧好不吃虧｜長者視力保健</title>
+<meta name="description" content="網頁型簡報：視力對長者的影響、怎麼觀察眼睛的警訊、多久看一次眼科、日常預防保健，以及台灣可用的視力資源。可上下捲動，也可一頁一頁切換。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFDF6; --ink:#111; --grey:#393C40; --muted:#6B7078;
+  --yellow:#F6ED00; --yellow-soft:#FFF9B8; --orange:#F15A29; --green:#17B169; --blue:#2F6FED; --red:#E5322D;
+  --line:#111; --b2:2px solid var(--line); --b3:3px solid var(--line);
+  --sh3:3px 3px 0 var(--line); --sh5:5px 5px 0 var(--line); --sh7:7px 7px 0 var(--line);
+  --radius:16px; --pad:clamp(18px,4.5vw,64px); --maxw:1240px; --top:74px;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory; scroll-behavior:smooth}
+@media (max-width:900px){html{scroll-snap-type:y proximity}}
+body{margin:0; font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif; color:var(--ink); background:var(--paper); font-size:clamp(18px,1.35vw,22px); line-height:1.6; font-weight:500; -webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0; font-weight:900; line-height:1.15; letter-spacing:.5px}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%; display:block}
+button{font:inherit; cursor:pointer; color:var(--ink)}
+.mark{background:linear-gradient(transparent 55%, var(--yellow) 55%, var(--yellow) 92%, transparent 92%)}
+.dark .mark{background:none; color:var(--yellow)}
+.ic{width:1.2em; height:1.2em; display:inline-block; vertical-align:-.22em; flex:none}
+
+/* ---------- top bar ---------- */
+.topbar{position:fixed; inset:0 0 auto 0; z-index:50; height:var(--top); display:flex; align-items:center; gap:12px; padding:0 var(--pad); background:rgba(255,253,246,.94); backdrop-filter:blur(8px); border-bottom:var(--b3)}
+.brand{display:flex; align-items:center; gap:10px; font-weight:900; font-size:1.05rem; white-space:nowrap}
+.brand .logo{width:40px; height:40px; border:var(--b2); border-radius:10px; background:var(--yellow); display:grid; place-items:center; box-shadow:var(--sh3)}
+.brand .logo .ic{width:26px; height:26px}
+.brand small{display:block; font-size:.68rem; font-weight:700; color:var(--grey); letter-spacing:.08em; line-height:1.1}
+.spacer{flex:1}
+.counter{font-weight:900; font-variant-numeric:tabular-nums; border:var(--b2); border-radius:999px; padding:4px 14px; background:#fff; color:var(--ink); box-shadow:var(--sh3); font-size:.9rem; white-space:nowrap}
+.tbtn{display:inline-flex; align-items:center; gap:6px; background:#fff; color:var(--ink); border:var(--b2); border-radius:999px; padding:7px 14px; font-weight:900; font-size:.9rem; box-shadow:var(--sh3); white-space:nowrap; transition:transform .08s, box-shadow .08s; text-decoration:none}
+.tbtn:hover{transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line)}
+.tbtn:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--line)}
+.tbtn.yl{background:var(--yellow)}
+@media (max-width:640px){ .tbtn .t{display:none} .brand small{display:none} .brand{font-size:.95rem} }
+
+/* ---------- dots nav ---------- */
+.dots{position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; gap:8px}
+.dots a{width:14px; height:14px; border-radius:50%; border:2px solid var(--line); background:#fff; display:block}
+.dots a.on{background:var(--yellow); box-shadow:2px 2px 0 var(--line)}
+@media (max-width:900px){.dots{display:none}}
+
+/* ---------- slides ---------- */
+.slide{position:relative; min-height:100svh; scroll-snap-align:start; display:flex; align-items:center; padding:calc(var(--top) + 3vh) var(--pad) 6vh; overflow:hidden}
+.slide.light{background:var(--paper) radial-gradient(circle, rgba(17,17,17,.10) 1.3px, transparent 1.5px) 0 0/22px 22px}
+.slide.dark{background:var(--ink); color:#fff}
+.slide.dark::before{content:""; position:absolute; inset:0; opacity:.08; pointer-events:none; background:radial-gradient(circle, #fff 1.3px, transparent 1.5px) 0 0/22px 22px}
+.wrap{position:relative; width:100%; max-width:var(--maxw); margin:0 auto}
+.grid2{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(24px,4vw,64px); align-items:center}
+.grid2.rev{grid-template-columns:.9fr 1.1fr}
+@media (max-width:900px){.grid2,.grid2.rev{grid-template-columns:1fr}}
+.kicker{display:inline-flex; align-items:center; gap:10px; font-weight:900; font-size:.9rem; letter-spacing:.1em; padding:6px 16px 6px 6px; border-radius:999px; border:var(--b2); background:#fff; color:var(--ink); box-shadow:var(--sh3); margin-bottom:18px}
+.kicker .n{display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--ink); color:var(--yellow); font-size:.85rem}
+.dark .kicker{background:var(--yellow)}
+h1.hero{font-size:clamp(36px,5.2vw,72px)}
+h2.title{font-size:clamp(30px,4.2vw,58px); margin-bottom:16px}
+.lead{font-size:clamp(18px,1.5vw,24px); font-weight:700; color:var(--grey); max-width:34em}
+.dark .lead{color:#e6e6e6}
+.src{font-size:.75rem; color:var(--muted); margin-top:18px; line-height:1.5}
+.dark .src{color:#b9b9b9}
+.pills{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px}
+.pill{display:inline-flex; align-items:center; gap:10px; font-weight:900; font-size:1rem; color:var(--ink); background:var(--yellow); border:var(--b3); border-radius:999px; padding:14px 28px; text-decoration:none; box-shadow:var(--sh5); transition:transform .1s, box-shadow .1s}
+.pill:hover{transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--line)}
+.pill:active{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--line)}
+.pill.ghost{background:#fff}
+.dark .pill.ghost{background:var(--ink); color:#fff; border-color:#fff; box-shadow:5px 5px 0 var(--yellow)}
+.illus{width:100%; max-width:560px; margin:0 auto}
+.illus img{width:100%; height:auto}
+.frame{background:#fff; border:var(--b3); border-radius:var(--radius); box-shadow:var(--sh7); padding:14px}
+.dark .frame{box-shadow:7px 7px 0 var(--yellow)}
+
+/* cards */
+.cards{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:18px}
+.card{background:#fff; color:var(--ink); border:var(--b3); border-radius:var(--radius); box-shadow:var(--sh5); padding:18px 18px 16px; display:flex; flex-direction:column; gap:8px}
+.card .ico{width:50px; height:50px; border:var(--b2); border-radius:12px; display:grid; place-items:center; background:var(--yellow)}
+.card .ico .ic{width:30px; height:30px}
+.card .ico.o{background:var(--orange); color:#fff} .card .ico.b{background:var(--blue); color:#fff} .card .ico.g{background:var(--green); color:#fff} .card .ico.r{background:var(--red); color:#fff}
+.card h3{font-size:1.2rem}
+.card p{font-size:.95rem; color:var(--grey); line-height:1.5}
+.card .big{font-size:clamp(34px,4vw,56px); font-weight:900; line-height:1; margin:4px 0}
+.card .big small{font-size:.4em; font-weight:700; color:var(--grey); margin-left:4px}
+.card.tint{background:var(--yellow-soft)}
+
+/* list */
+.biglist{list-style:none; padding:0; margin:14px 0 0; display:grid; gap:12px}
+.biglist li{display:flex; gap:14px; align-items:flex-start; background:#fff; color:var(--ink); border:var(--b2); border-radius:14px; padding:12px 16px; box-shadow:var(--sh3); font-weight:700}
+.biglist li .n{flex:none; width:38px; height:38px; border-radius:50%; background:var(--yellow); border:var(--b2); display:grid; place-items:center; font-weight:900}
+.biglist li span.d{display:block; font-weight:500; color:var(--grey); font-size:.9rem}
+
+/* table */
+.tbl{width:100%; border-collapse:separate; border-spacing:0; background:#fff; color:var(--ink); border:var(--b3); border-radius:var(--radius); overflow:hidden; box-shadow:var(--sh5); font-size:.95rem}
+.tbl th,.tbl td{padding:12px 14px; text-align:left; border-bottom:var(--b2); vertical-align:top}
+.tbl th{background:var(--yellow); font-weight:900}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td b{font-weight:900}
+.tbl .tag{display:inline-block; border:2px solid var(--line); border-radius:999px; padding:0 10px; font-weight:900; font-size:.85rem; background:var(--yellow-soft); white-space:nowrap}
+.tbl .tag.red{background:var(--red); color:#fff}
+
+/* checklist */
+.checks{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:10px; margin-top:16px}
+.chk{display:flex; align-items:center; gap:12px; background:#fff; color:var(--ink); border:var(--b2); border-radius:14px; padding:10px 14px; font-weight:700; cursor:pointer; user-select:none; box-shadow:var(--sh3); font-size:1rem; transition:transform .08s}
+.chk:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--line)}
+.chk .box{flex:none; width:30px; height:30px; border:var(--b3); border-radius:8px; background:#fff; display:grid; place-items:center; font-weight:900}
+.chk.on{background:var(--yellow)} .chk.on .box{background:var(--ink); color:var(--yellow)}
+.chk.red{border-color:var(--red)} .chk.red .box{border-color:var(--red)}
+.chkres{margin-top:16px; background:var(--yellow); color:var(--ink); border:var(--b3); border-radius:14px; padding:12px 18px; font-weight:900; box-shadow:5px 5px 0 var(--yellow); display:inline-block}
+.dark .chkres{box-shadow:5px 5px 0 #fff}
+
+/* disease viewer */
+.scenewrap{position:relative; width:100%; aspect-ratio:8/5; border-radius:var(--radius); overflow:hidden; border:var(--b3); box-shadow:var(--sh7); background:#000}
+.scenewrap svg{position:absolute; inset:0; width:100%; height:100%}
+.scenewrap .ov{position:absolute; inset:0; pointer-events:none}
+.seg{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0}
+.seg button{border:var(--b2); border-radius:999px; background:#fff; padding:8px 16px; font-weight:900; font-size:.95rem; box-shadow:var(--sh3)}
+.seg button.on{background:var(--yellow)}
+.dinfo{background:#fff; border:var(--b3); border-radius:var(--radius); box-shadow:var(--sh5); padding:18px 20px}
+.dinfo h3{font-size:1.5rem; margin-bottom:8px}
+.dinfo p{font-size:1rem; color:var(--grey); margin-top:6px}
+.dinfo p b{color:var(--ink); font-weight:900}
+
+/* amsler */
+.amgrid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(18px,3vw,40px); align-items:start}
+@media (max-width:900px){.amgrid{grid-template-columns:1fr}}
+.amsler svg{width:100%; max-width:440px; background:#fff; border:var(--b3); box-shadow:var(--sh5); display:block; margin:0 auto}
+.amabn{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px}
+.amabn figure{margin:0; text-align:center; font-weight:900; font-size:.85rem}
+.amabn svg{width:100%; background:#fff; border:var(--b2); box-shadow:var(--sh3); display:block; margin-bottom:6px}
+
+/* QR */
+.qr{display:flex; align-items:center; gap:16px; background:#fff; color:var(--ink); border:var(--b3); border-radius:var(--radius); box-shadow:var(--sh5); padding:14px 18px; max-width:520px}
+.qr img,.qr svg{width:120px; height:120px; flex:none}
+.qr b{display:block; font-size:1.05rem}
+.qr small{display:block; color:var(--grey); font-size:.8rem; word-break:break-all; margin-top:4px}
+
+/* stat slide */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:20px}
+
+/* responsive text in tables on phones */
+@media (max-width:640px){ .tbl{font-size:.85rem} .tbl th,.tbl td{padding:10px} .amabn{grid-template-columns:repeat(2,1fr)} }
+@media (prefers-reduced-motion:reduce){*{transition:none !important; scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#s1" style="text-decoration:none"><span class="logo" data-ico="eye"></span><span>眼睛顧好不吃虧<small>活出青春 3.0・第六堂 視力</small></span></a>
+  <span class="spacer"></span>
+  <span class="counter" id="counter">1 / 16</span>
+  <button class="tbtn" id="prev" aria-label="上一頁">◀︎<span class="t"> 上一頁</span></button>
+  <button class="tbtn yl" id="next" aria-label="下一頁"><span class="t">下一頁 </span>▶︎</button>
+  <a class="tbtn" href="https://mattsue1003.github.io/eye-games-for-seniors/" target="_blank" rel="noopener" data-ico="game"><span class="t">互動遊戲</span></a>
+</header>
+<nav class="dots" id="dots" aria-label="投影片導覽"></nav>
+
+<!-- 1 封面 -->
+<section class="slide light" id="s1">
+  <div class="wrap grid2">
+    <div>
+      <span class="kicker"><span class="n">眼</span>活出青春 3.0：健康存六力・第六堂</span>
+      <h1 class="hero">眼睛顧好不吃虧，<br>看見<span class="mark">精彩每一天</span></h1>
+      <p class="lead" style="margin-top:16px">視力對長者有多重要？眼睛出問題時怎麼知道、怎麼觀察？多久要看一次醫生？今天用一堂課，把預防保健與可用資源一次說清楚。</p>
+      <div class="pills">
+        <a class="pill" href="#s2">開始上課 ▶︎</a>
+        <a class="pill ghost" href="https://mattsue1003.github.io/eye-games-for-seniors/" target="_blank" rel="noopener">護眼同樂會（互動遊戲）</a>
+      </div>
+      <div class="qr" style="margin-top:26px"><img src="img/qr.svg" alt="本簡報網址 QR code"><div><b>掃描用手機看這份簡報</b><small>mattsue1003.github.io/eye-health-for-seniors/</small><small>可上下捲動，也可用「上一頁／下一頁」切換</small></div></div>
+    </div>
+    <div class="illus"><img src="img/cover.png" alt="阿嬤戴老花眼鏡看藥袋，阿公戴帽子與墨鏡"></div>
+  </div>
+</section>
+
+<!-- 2 大綱 -->
+<section class="slide dark" id="s2">
+  <div class="wrap">
+    <span class="kicker"><span class="n">1</span>今天聊五件事</span>
+    <h2 class="title">看得清楚，<span class="mark">生活才能自己作主</span></h2>
+    <ol class="biglist" style="max-width:860px">
+      <li><span class="n">1</span><span>視力對長者的影響<span class="d">跌倒、失智、憂鬱、吃錯藥……都和眼睛有關</span></span></li>
+      <li><span class="n">2</span><span>眼睛出問題，怎麼知道？<span class="d">哪些是正常老化、哪些是警訊；家人可以怎麼觀察</span></span></li>
+      <li><span class="n">3</span><span>多久要看一次醫生？<span class="d">一般長者、糖尿病、高風險族群各不同；哪些情況要立刻就醫</span></span></li>
+      <li><span class="n">4</span><span>預防保健怎麼做<span class="d">用眼習慣、防曬、飲食、居家光線與安全</span></span></li>
+      <li><span class="n">5</span><span>視力相關資源<span class="d">衛生所、健保、低視能與輔具、配鏡協助</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 3 影響 -->
+<section class="slide light" id="s3">
+  <div class="wrap grid2 rev">
+    <div class="illus"><img src="img/daily.png" alt="阿公在檯燈下瞇著眼看藥罐"></div>
+    <div>
+      <span class="kicker"><span class="n">1</span>視力對長者的影響</span>
+      <h2 class="title">眼睛不好，<span class="mark">影響的不只是看東西</span></h2>
+      <div class="cards">
+        <div class="card"><div class="ico o" data-ico="fall"></div><h3>容易跌倒</h3><p>看不清楚階梯邊緣、地上的東西、深淺差異，跌倒風險明顯增加；研究顯示視力差的長者跌倒機率約為一般人的 1.7 倍以上。</p></div>
+        <div class="card"><div class="ico b" data-ico="brain"></div><h3>失智風險增加</h3><p>2024 年《刺胳針》失智委員會把「未矯正的視力損失」列入 14 項可改變的風險因子，約占可預防病例的 2%。</p></div>
+        <div class="card"><div class="ico g" data-ico="heart"></div><h3>心情低落、不想出門</h3><p>看不清楚就不敢出門、不再看書追劇、少和人互動；視力功能喪失者出現憂鬱的比例約為沒有的人的 2 倍。</p></div>
+        <div class="card"><div class="ico r" data-ico="pill"></div><h3>吃錯藥、生活自理變難</h3><p>藥袋上的字看不清楚、分不出藥丸顏色；煮飯、付錢、看時間、搭公車都變得吃力。</p></div>
+      </div>
+      <p class="src">資料來源：Lord &amp; Dayhew, J Am Geriatr Soc 2001（DOI 10.1046/j.1532-5415.2001.49107.x）；Livingston et al., Lancet 2024（DOI 10.1016/S0140-6736(24)01296-0）；Zhang et al., JAMA Ophthalmol 2013（DOI 10.1001/jamaophthalmol.2013.2597）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 數字 -->
+<section class="slide dark" id="s4">
+  <div class="wrap">
+    <span class="kicker"><span class="n">1</span>數字說話</span>
+    <h2 class="title">很多視力問題，<span class="mark">其實可以預防或處理</span></h2>
+    <div class="stats">
+      <div class="card"><p>全球至少</p><div class="big">22<small>億人</small></div><p>有視力障礙；其中至少 <b>10 億人</b>的視力問題「本可預防，或還沒有被處理」。最常見的原因是沒配眼鏡（屈光不正）與白內障。</p><p class="src">WHO《World report on vision》2019</p></div>
+      <div class="card"><p>新北市 2025 年</p><div class="big">5<small>萬多名長者</small></div><p>在 29 區衛生所完成 ICOPE 長者功能評估，<b>最常見的異常項目就是「視力」</b>。看不清楚的人，比我們想像的多。</p><p class="src">新北市衛生局新聞稿（2026）</p></div>
+      <div class="card"><p>台灣白內障就醫人數</p><div class="big">110<small>萬人以上</small></div><p>其中 60 歲以上約占八成。白內障可以手術處理，拖著不處理反而影響生活與安全。</p><p class="src">媒體引述國民健康署資料（2025 年 5 月）</p></div>
+    </div>
+    <p class="lead" style="margin-top:22px">重點不是嚇大家，而是：<b>看不清楚不是「老了就這樣」，很多都有辦法。</b></p>
+  </div>
+</section>
+
+<!-- 5 正常老化 vs 警訊 -->
+<section class="slide light" id="s5">
+  <div class="wrap">
+    <span class="kicker"><span class="n">2</span>怎麼知道眼睛出問題</span>
+    <h2 class="title">哪些是<span class="mark">正常老化</span>，哪些是<span class="mark">警訊</span>？</h2>
+    <div class="grid2" style="align-items:start">
+      <div class="card tint"><div class="ico" data-ico="ok"></div><h3>正常老化，調整就好</h3>
+        <ul class="biglist">
+          <li><span class="n">1</span><span>看近的要拿遠一點（老花）<span class="d">40 歲後多數人都會，配一副適合的老花眼鏡</span></span></li>
+          <li><span class="n">2</span><span>需要更亮的光線才看得清楚<span class="d">同樣的字，70 歲需要的光大約是 20 歲的 3 倍</span></span></li>
+          <li><span class="n">3</span><span>怕眩光、從亮處走進暗處要適應比較久<span class="d">戴帽子、墨鏡；進門先停一下再走</span></span></li>
+          <li><span class="n">4</span><span>眼睛比較乾、容易酸<span class="d">多眨眼、休息、必要時人工淚液</span></span></li>
+        </ul></div>
+      <div class="card"><div class="ico r" data-ico="alert"></div><h3>不是老化，是警訊</h3>
+        <ul class="biglist">
+          <li><span class="n" style="background:var(--red);color:#fff">!</span><span>視線霧霧、像隔著毛玻璃，換眼鏡也沒用<span class="d">可能是白內障</span></span></li>
+          <li><span class="n" style="background:var(--red);color:#fff">!</span><span>直線看起來變彎、中間暗一塊<span class="d">可能是黃斑部病變</span></span></li>
+          <li><span class="n" style="background:var(--red);color:#fff">!</span><span>旁邊的東西常看不到、常撞到<span class="d">可能是青光眼的視野缺損</span></span></li>
+          <li><span class="n" style="background:var(--red);color:#fff">!</span><span>飛蚊突然變多、閃光、黑影<span class="d">可能是視網膜問題，要盡快就醫</span></span></li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 四大眼疾 看出去的樣子 -->
+<section class="slide light" id="s6">
+  <div class="wrap">
+    <span class="kicker"><span class="n">2</span>看出去的樣子</span>
+    <h2 class="title">四種常見眼疾，<span class="mark">世界會變成什麼樣</span>？</h2>
+    <p class="lead">點一下按鈕，看看同一座公園在不同眼睛裡的樣子（示意）。</p>
+    <div class="seg" id="dseg"></div>
+    <div class="grid2">
+      <div id="scene"></div>
+      <div class="dinfo" id="dinfo"></div>
+    </div>
+    <p class="src">內容依課程講義「眼睛顧好不吃虧」整理；畫面為示意，實際症狀因人而異。</p>
+  </div>
+</section>
+
+<!-- 7 自我檢查清單 -->
+<section class="slide dark" id="s7">
+  <div class="wrap">
+    <span class="kicker"><span class="n">2</span>自我觀察</span>
+    <h2 class="title">最近有沒有這些情形？<span class="mark">勾勾看</span></h2>
+    <div class="checks" id="checks"></div>
+    <div class="chkres" id="chkres">還沒有勾選。請大家想一想最近三個月的情形。</div>
+    <p class="src">紅框項目屬於「立刻就醫」警訊。此清單為衛教提醒，不能取代眼科檢查。</p>
+  </div>
+</section>
+
+<!-- 8 家人怎麼觀察 -->
+<section class="slide light" id="s8">
+  <div class="wrap">
+    <span class="kicker"><span class="n">2</span>家人與照顧者可以這樣看</span>
+    <h2 class="title">長輩常常不說，<span class="mark">但生活會透露</span></h2>
+    <div class="grid2" style="align-items:start">
+      <div>
+        <h3 style="font-size:1.3rem;margin-bottom:8px">生活中的小線索</h3>
+        <ul class="biglist">
+          <li><span class="n">1</span><span>走路常碰到門框、桌角，上下樓梯會踩空或用腳試探</span></li>
+          <li><span class="n">2</span><span>倒水常溢出、夾菜夾不到、找東西找很久</span></li>
+          <li><span class="n">3</span><span>不再看報紙、追劇；看電視越坐越近、音量越開越大</span></li>
+          <li><span class="n">4</span><span>衣服配色變奇怪、臉上或手上出現不明的擦傷</span></li>
+          <li><span class="n">5</span><span>認錯人、看錯藥、簽名歪掉、對帳算錯</span></li>
+          <li><span class="n">6</span><span>變得不想出門、晚上不敢外出</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1.3rem;margin-bottom:8px">在家三招，三分鐘</h3>
+        <div class="cards" style="grid-template-columns:1fr">
+          <div class="card"><div class="ico" data-ico="hand"></div><h3>遮一眼比一比</h3><p>輪流遮住一眼，看同一個東西（月曆、時鐘）。兩眼差很多，或某一眼模糊、有黑影，就要檢查。很多人單眼出問題多年都沒發現。</p></div>
+          <div class="card"><div class="ico" data-ico="grid"></div><h3>方格表檢查</h3><p>作業單上的阿姆斯勒方格表，30 公分、一次一眼。線條彎、斷、缺、糊都是異常（下一頁示範）。</p></div>
+          <div class="card"><div class="ico" data-ico="pill"></div><h3>藥袋距離測試</h3><p>戴著平常的眼鏡，在平常的光線下讀藥袋。要拿到很遠、或讀錯字，就是該檢查、該配鏡的時候。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 方格表 -->
+<section class="slide light" id="s9">
+  <div class="wrap">
+    <span class="kicker"><span class="n">2</span>黃斑部自我檢查</span>
+    <h2 class="title">阿姆斯勒方格表<span class="mark">六步驟</span></h2>
+    <div class="amgrid">
+      <div class="amsler" id="amsler"></div>
+      <div>
+        <ol class="biglist" style="margin-top:0">
+          <li><span class="n">1</span><span>光線要亮，戴上老花眼鏡</span></li>
+          <li><span class="n">2</span><span>方格表放在眼前 <b>30 公分</b></span></li>
+          <li><span class="n">3</span><span>用手遮住左眼</span></li>
+          <li><span class="n">4</span><span>右眼盯住中間黑點，眼睛不要移動</span></li>
+          <li><span class="n">5</span><span>看線條有沒有<b>彎、斷、缺、糊</b></span></li>
+          <li><span class="n">6</span><span>換遮右眼，左眼再做一次</span></li>
+        </ol>
+        <div class="amabn" id="amabn"></div>
+        <p class="src">55 歲以上、糖尿病、高度近視、抽菸者更要常做。有異常或和上次不一樣，請盡快到眼科；就算正常，也要每年散瞳檢查眼底。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 紅燈 -->
+<section class="slide dark" id="s10">
+  <div class="wrap">
+    <span class="kicker"><span class="n">3</span>這些情況不要等</span>
+    <h2 class="title">出現這些，<span class="mark">當天就去眼科或急診</span></h2>
+    <div class="cards">
+      <div class="card"><div class="ico r" data-ico="alert"></div><h3>突然看不見或視力驟降</h3><p>單眼或雙眼，幾分鐘到幾小時內變差，就算後來恢復也要就醫。</p></div>
+      <div class="card"><div class="ico r" data-ico="flash"></div><h3>閃光、黑影或飛蚊突然暴增</h3><p>像有布幕從旁邊拉過來，可能是視網膜剝離。</p></div>
+      <div class="card"><div class="ico r" data-ico="pain"></div><h3>劇烈眼痛＋頭痛＋想吐</h3><p>眼睛紅、看燈有彩虹圈，可能是急性青光眼，會在短時間傷害視神經。</p></div>
+      <div class="card"><div class="ico r" data-ico="eye"></div><h3>眼睛受傷或化學物濺入</h3><p>先用大量清水沖洗 15 分鐘，立刻就醫；不要揉、不要自己拔異物。</p></div>
+      <div class="card"><div class="ico r" data-ico="face"></div><h3>看東西變兩個、臉歪嘴斜</h3><p>可能是中風徵兆，打 119。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 多久看一次 -->
+<section class="slide light" id="s11">
+  <div class="wrap grid2 rev">
+    <div class="illus"><img src="img/doctor.png" alt="眼科醫師用裂隙燈檢查阿嬤的眼睛"></div>
+    <div>
+      <span class="kicker"><span class="n">3</span>多久看一次醫生</span>
+      <h2 class="title">沒症狀也要檢查，<span class="mark">因為很多眼疾早期沒感覺</span></h2>
+      <table class="tbl">
+        <tr><th>我是……</th><th>建議頻率</th></tr>
+        <tr><td><b>65 歲以上</b>，沒有特別症狀或風險</td><td><span class="tag">每 1～2 年</span> 完整眼科檢查（視力、眼壓、散瞳看眼底）</td></tr>
+        <tr><td><b>40 歲以上</b></td><td><span class="tag">每年</span> 量眼壓，早期發現青光眼</td></tr>
+        <tr><td><b>糖尿病</b></td><td><span class="tag">每年</span> 散瞳眼底檢查（健保糖尿病照護品質指標）；已有病變依醫囑更密</td></tr>
+        <tr><td>高度近視、青光眼或黃斑部病變<b>家族史</b>、曾有眼疾、長期用類固醇</td><td><span class="tag">每年或依醫囑</span></td></tr>
+        <tr><td>已經有<b>症狀</b>或自我檢查<b>異常</b></td><td><span class="tag red">不要等</span> 盡快掛眼科</td></tr>
+      </table>
+      <p class="src">依美國眼科醫學會成人眼科檢查指引（AAO PPP 2020，DOI 10.1016/j.ophtha.2020.10.024；2026 更新維持相同間隔）、健保署糖尿病醫療給付改善方案品質指標、課程講義整理。實際頻率請依眼科醫師建議。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 預防六招 -->
+<section class="slide light" id="s12">
+  <div class="wrap grid2">
+    <div>
+      <span class="kicker"><span class="n">4</span>預防保健</span>
+      <h2 class="title">每天護眼<span class="mark">六件事</span></h2>
+      <div class="cards">
+        <div class="card"><div class="ico" data-ico="clock"></div><h3>30 分鐘休息 10 分鐘</h3><p>看書、追劇、滑手機每 30 分鐘，看看遠方或閉眼休息。</p></div>
+        <div class="card"><div class="ico" data-ico="sun"></div><h3>外出戴帽、戴抗 UV 墨鏡</h3><p>紫外線會讓白內障、黃斑部病變提早報到。</p></div>
+        <div class="card"><div class="ico" data-ico="hand"></div><h3>不隨便揉眼睛</h3><p>手不碰眼睛；不舒服找醫師，不要自己買藥水亂點。</p></div>
+        <div class="card"><div class="ico" data-ico="lamp"></div><h3>室內光線要充足</h3><p>看書、走路燈要亮；晚上起床先開小夜燈。</p></div>
+        <div class="card"><div class="ico" data-ico="calendar"></div><h3>每年眼科檢查</h3><p>請醫師散瞳檢查眼底；把檢查日期寫在月曆上。</p></div>
+        <div class="card"><div class="ico" data-ico="heart"></div><h3>控制血糖、血壓、血脂</h3><p>按時量、按時吃藥、少油少鹽少糖；戒菸對眼睛也是大好事。</p></div>
+      </div>
+      <p class="src">與課程作業單「每天護眼任務」相同，這週每天打勾！</p>
+    </div>
+    <div class="illus"><img src="img/park.png" alt="阿公阿嬤戴帽子與墨鏡在公園散步"></div>
+  </div>
+</section>
+
+<!-- 13 吃與住 -->
+<section class="slide light" id="s13">
+  <div class="wrap grid2 rev">
+    <div class="illus"><img src="img/reading.png" alt="阿嬤在明亮的窗邊看書，桌上有蔬菜與魚"></div>
+    <div>
+      <span class="kicker"><span class="n">4</span>吃得對、住得安全</span>
+      <h2 class="title">餐桌和家裡，<span class="mark">也能護眼</span></h2>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card"><div class="ico g" data-ico="leaf"></div><h3>餐桌上</h3><p><b>深綠色蔬菜</b>（菠菜、地瓜葉）、<b>黃橘色蔬果</b>（南瓜、胡蘿蔔、木瓜）、<b>魚</b>與堅果，是黃斑部需要的營養；均衡飲食比保健食品重要，想吃營養品先問醫師或藥師。</p></div>
+        <div class="card"><div class="ico b" data-ico="lamp"></div><h3>家裡的光</h3><p>客廳、走道、樓梯、浴室都要亮；閱讀用檯燈從側後方照；夜間動線裝感應小夜燈；窗簾避免強烈逆光眩光。</p></div>
+        <div class="card"><div class="ico o" data-ico="stairs"></div><h3>看得見的安全</h3><p>樓梯邊緣貼<b>對比色防滑條</b>、電燈開關用深色底板、常用物品固定位置；藥盒用大字分裝；準備放大鏡、大字體手機與電視遙控器。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 資源 -->
+<section class="slide dark" id="s14">
+  <div class="wrap">
+    <span class="kicker"><span class="n">5</span>資源在哪裡</span>
+    <h2 class="title">需要幫忙時，<span class="mark">可以找這些地方</span></h2>
+    <div class="cards">
+      <div class="card"><div class="ico" data-ico="home"></div><h3>衛生所（新北市 29 區）</h3><p>65 歲以上可做 <b>ICOPE 長者功能評估</b>，項目包含視力；篩檢異常會轉介眼科。各縣市衛生所亦有長者健康檢查，請洽詢當年度方案。</p></div>
+      <div class="card"><div class="ico" data-ico="hospital"></div><h3>眼科門診與健保</h3><p>眼科門診、眼壓、眼底檢查都有健保；<b>白內障手術與基本款人工水晶體健保給付</b>（功能性水晶體需自付差額）；糖尿病友每年眼底檢查是健保照護指標。</p></div>
+      <div class="card"><div class="ico" data-ico="glasses"></div><h3>配眼鏡與老花眼鏡</h3><p>度數要驗光，不要借別人的戴。部分縣市曾有長者配鏡協助，但<b>依當年度公告辦理</b>（新北市自 113 年度起已停辦），請向衛生所或社會局確認最新方案。</p></div>
+      <div class="card"><div class="ico" data-ico="magnifier"></div><h3>低視能與輔具</h3><p>視力矯正後仍看不清楚，可到<b>低視能中心</b>評估（如愛盲基金會低視能中心、各地低視能重建服務中心）。符合身心障礙資格者，<b>各縣市輔具資源中心</b>可協助放大鏡、擴視機等輔具補助。</p></div>
+      <div class="card"><div class="ico" data-ico="phone"></div><h3>長照專線 1966</h3><p>視力退化已影響吃飯、走路、外出等日常生活時，可撥 1966 詢問長照服務與居家安全環境改善。</p></div>
+      <div class="card"><div class="ico" data-ico="book"></div><h3>正確資訊</h3><p>國民健康署「健康九九＋」網站、各醫院眼科衛教單張、中華民國眼科醫學會。網路偏方與來路不明的眼藥水，請先問醫師。</p></div>
+    </div>
+    <p class="src">資源內容整理自新北市衛生局、衛生福利部與各機構公開資訊（2026 年 11 月）；方案與補助年年調整，請以各單位最新公告為準。</p>
+  </div>
+</section>
+
+<!-- 15 帶回家 -->
+<section class="slide light" id="s15">
+  <div class="wrap grid2">
+    <div>
+      <span class="kicker"><span class="n">★</span>今天帶回家</span>
+      <h2 class="title">記住<span class="mark">三件事</span>就夠了</h2>
+      <ol class="biglist" style="font-size:1.1rem">
+        <li><span class="n">1</span><span>看不清楚不是「老了就這樣」<span class="d">白內障能開、老花能配、黃斑部能治療；越早發現越好。</span></span></li>
+        <li><span class="n">2</span><span>每年給眼睛一次健檢<span class="d">65 歲以上每 1～2 年、糖尿病每年；有症狀不要等。把日期寫在月曆上。</span></span></li>
+        <li><span class="n">3</span><span>每天護眼六件事＋遮一眼比一比<span class="d">用作業單打勾一週，下次上課一起分享。</span></span></li>
+      </ol>
+      <div class="pills">
+        <a class="pill" href="https://mattsue1003.github.io/eye-games-for-seniors/" target="_blank" rel="noopener">一起玩護眼同樂會 ▶︎</a>
+        <a class="pill ghost" href="#s16">參考資料</a>
+      </div>
+    </div>
+    <div>
+      <div class="qr"><img src="img/qr.svg" alt="本簡報網址 QR code"><div><b>這份簡報的網址</b><small>mattsue1003.github.io/eye-health-for-seniors/</small><small>回家後可以再看一次，也可以傳給家人。</small></div></div>
+      <div class="frame" style="margin-top:18px"><p style="font-weight:900;font-size:1.1rem">小叮嚀</p><p style="color:var(--grey);font-size:.95rem;margin-top:6px">本簡報為健康教育內容，不能取代眼科醫師的檢查與診斷。突然看不清楚、閃光或黑影變多、劇烈眼痛，請立刻就醫。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 參考資料 -->
+<section class="slide light" id="s16">
+  <div class="wrap">
+    <span class="kicker"><span class="n">※</span>參考資料</span>
+    <h2 class="title" style="font-size:clamp(26px,3.4vw,44px)">引用來源</h2>
+    <ol class="biglist" style="font-size:.9rem;font-weight:500">
+      <li><span class="n">1</span><span>World Health Organization. <i>World report on vision</i>. Geneva: WHO; 2019. ISBN 978-92-4-151657-0.</span></li>
+      <li><span class="n">2</span><span>Livingston G, et al. Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission. <i>Lancet</i> 2024;404:572–628. DOI 10.1016/S0140-6736(24)01296-0</span></li>
+      <li><span class="n">3</span><span>Lord SR, Dayhew J. Visual risk factors for falls in older people. <i>J Am Geriatr Soc</i> 2001;49:508–515. DOI 10.1046/j.1532-5415.2001.49107.x</span></li>
+      <li><span class="n">4</span><span>Zhang X, et al. Association between depression and functional vision loss in persons 20 years of age or older in the United States, NHANES 2005–2008. <i>JAMA Ophthalmol</i> 2013;131:573–581. DOI 10.1001/jamaophthalmol.2013.2597</span></li>
+      <li><span class="n">5</span><span>American Academy of Ophthalmology. Comprehensive Adult Medical Eye Evaluation Preferred Practice Pattern. <i>Ophthalmology</i> 2021;128(1):P1–P29. DOI 10.1016/j.ophtha.2020.10.024</span></li>
+      <li><span class="n">6</span><span>衛生福利部中央健康保險署：糖尿病醫療給付改善方案（品質指標：每年眼底檢查）。</span></li>
+      <li><span class="n">7</span><span>新北市政府衛生局：「銀髮勇者召集令」ICOPE 長者功能評估新聞稿（2026），2025 年逾 5 萬名長者受檢，最常見異常項目為視力。</span></li>
+      <li><span class="n">8</span><span>國民健康署資料（媒體引述，2025 年 5 月）：台灣白內障就醫人數逾 110 萬，60 歲以上約占八成。</span></li>
+      <li><span class="n">9</span><span>活出青春 3.0：健康存六力・第六堂「視力」課程講義與作業單（蔡欣潔護理師，2026）。</span></li>
+    </ol>
+    <p class="src">插圖以 AI 工具產生線稿後編修；簡報程式與互動遊戲「護眼同樂會」採 MIT 授權，歡迎社區據點自由使用。</p>
+  </div>
+</section>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
+
+/* ---------- 線條圖示 ---------- */
+const ICONS = {
+  eye: '<path d="M4 24c6-9 12-13 20-13s14 4 20 13c-6 9-12 13-20 13S10 33 4 24z"/><circle cx="24" cy="24" r="6"/>',
+  game: '<rect x="6" y="14" width="36" height="22" rx="8"/><path d="M15 21v8M11 25h8"/><circle cx="32" cy="23" r="2" fill="currentColor"/><circle cx="37" cy="27" r="2" fill="currentColor"/>',
+  fall: '<circle cx="30" cy="10" r="4"/><path d="M28 16l-8 8 6 6-6 12M20 24l-9-2M26 30l10 4 4 8"/>',
+  brain: '<path d="M20 8a7 7 0 0 0-7 7 7 7 0 0 0-4 12 7 7 0 0 0 7 11h4V8zM28 8a7 7 0 0 1 7 7 7 7 0 0 1 4 12 7 7 0 0 1-7 11h-4V8z"/>',
+  heart: '<path d="M24 41S6 30 6 18a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 12-18 23-18 23z"/>',
+  pill: '<rect x="6" y="18" width="36" height="14" rx="7" transform="rotate(-35 24 25)"/><path d="M19 16l10 17"/>',
+  ok: '<circle cx="24" cy="24" r="17"/><path d="M15 25l6 6 12-13"/>',
+  alert: '<path d="M24 6 44 40H4z"/><path d="M24 19v10"/><circle cx="24" cy="34" r="1.8" fill="currentColor"/>',
+  hand: '<path d="M14 26V12a3 3 0 0 1 6 0v10M20 20V9a3 3 0 0 1 6 0v11M26 20v-8a3 3 0 0 1 6 0v10M32 22v-4a3 3 0 0 1 6 0v12c0 8-6 13-13 13s-11-4-14-10l-4-8a3 3 0 0 1 5-3l2 4"/>',
+  grid: '<rect x="8" y="8" width="32" height="32"/><path d="M8 18.7h32M8 29.3h32M18.7 8v32M29.3 8v32"/><circle cx="24" cy="24" r="3" fill="currentColor"/>',
+  flash: '<path d="M27 5 11 27h11l-2 16 16-22H25z"/>',
+  pain: '<circle cx="24" cy="24" r="14"/><path d="M17 20l5 3-5 3M31 20l-5 3 5 3M18 32c3-3 9-3 12 0"/>',
+  face: '<circle cx="24" cy="24" r="16"/><path d="M17 21h4M27 21h4M16 32c4-4 12 2 16-2"/>',
+  clock: '<circle cx="24" cy="24" r="16"/><path d="M24 14v10l7 4"/>',
+  sun: '<circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2"/>',
+  lamp: '<path d="M14 24 20 6h8l6 18z"/><path d="M24 24v12M16 42h16M24 36v6"/>',
+  calendar: '<rect x="6" y="10" width="36" height="30" rx="4"/><path d="M6 19h36M15 6v8M33 6v8"/><path d="M17 30l5 5 9-10"/>',
+  leaf: '<path d="M40 8C20 8 10 18 10 34c0 2 0 4 1 6 16 0 29-10 29-32z"/><path d="M11 40c6-10 14-18 22-24"/>',
+  stairs: '<path d="M6 42h8V32h8V22h8V12h12"/><path d="M6 42V34"/>',
+  home: '<path d="M7 24 24 9l17 15"/><path d="M12 21v18h24V21"/><path d="M20 39V29h8v10"/>',
+  hospital: '<rect x="8" y="12" width="32" height="30"/><path d="M18 12V6h12v6M24 20v12M18 26h12M8 42h32"/>',
+  glasses: '<circle cx="15" cy="27" r="8"/><circle cx="33" cy="27" r="8"/><path d="M23 27h2M7 26l-3-9M41 26l3-9"/>',
+  magnifier: '<circle cx="21" cy="21" r="11"/><path d="M29 29l11 11"/>',
+  phone: '<path d="M14 6h10l4 10-5 3a20 20 0 0 0 8 8l3-5 10 4v10a4 4 0 0 1-4 4C22 40 8 26 8 10a4 4 0 0 1 4-4z"/>',
+  book: '<path d="M8 10h12a4 4 0 0 1 4 4v26a4 4 0 0 0-4-4H8zM40 10H28a4 4 0 0 0-4 4v26a4 4 0 0 1 4-4h12z"/>'
+};
+const icon = id => `<svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[id] || ''}</svg>`;
+document.querySelectorAll('[data-ico]').forEach(e => e.insertAdjacentHTML('afterbegin', icon(e.dataset.ico)));
+
+/* ---------- 導覽 ---------- */
+const slides = [...document.querySelectorAll('.slide')];
+const dots = $('#dots'); slides.forEach((s, i) => { const a = el('a'); a.href = '#' + s.id; a.setAttribute('aria-label', `第 ${i + 1} 頁`); dots.appendChild(a); });
+let cur = 0;
+const setCur = i => { cur = i; $('#counter').textContent = `${i + 1} / ${slides.length}`; dots.querySelectorAll('a').forEach((a, j) => a.classList.toggle('on', j === i)); const dark = slides[i].classList.contains('dark'); document.querySelector('.topbar').style.background = dark ? 'rgba(17,17,17,.9)' : 'rgba(255,253,246,.94)'; document.querySelector('.topbar').style.color = dark ? '#fff' : '#111'; document.querySelector('.topbar').style.borderBottomColor = dark ? '#F6ED00' : '#111'; };
+const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setCur(slides.indexOf(e.target)); }); }, { threshold: .55 });
+slides.forEach(s => io.observe(s));
+const go = i => { i = Math.max(0, Math.min(slides.length - 1, i)); slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+$('#prev').onclick = () => go(cur - 1); $('#next').onclick = () => go(cur + 1);
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+  else if (e.key === 'Home') go(0); else if (e.key === 'End') go(slides.length - 1);
+  else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+});
+
+/* ---------- 看出去的樣子 ---------- */
+const DISEASES = [
+  { k: 'normal', name: '正常', sign: '看得清楚、顏色鮮明、直線是直的。', act: '繼續保持護眼好習慣，每 1～2 年檢查一次。' },
+  { k: 'cataract', name: '白內障', sign: '像隔著毛玻璃：視線霧霧、怕光、夜間車燈刺眼、顏色變黃變暗。', act: '九成以上因老化。初期先換眼鏡；影響生活時手術換人工水晶體（健保給付基本款）。眼藥水只能延緩，不能治好。' },
+  { k: 'glaucoma', name: '青光眼', sign: '視野像隧道：周邊慢慢縮小，早期常常沒有症狀。', act: '與眼壓高、高度近視、家族史有關。40 歲後每年量眼壓；已缺損的視野無法恢復，所以要早發現、按時點藥。' },
+  { k: 'macular', name: '黃斑部病變', sign: '中間看不見：直線變彎、中心有黑影或空白、看字困難，周邊仍正常。', act: '55 歲以上較多。用方格表自我檢查，有彎曲、黑影就盡快看眼科；濕性可用眼內注射治療，需持續回診。戒菸、均衡飲食。' },
+  { k: 'diabetic', name: '糖尿病視網膜病變', sign: '黑點遮眼：視力模糊、飛蚊變多、黑影，早期常沒有症狀。', act: '長期高血糖傷害視網膜血管。控制血糖血壓；每年散瞳眼底檢查；突然變暗要立刻就醫。' }
+];
+function sceneSVG() {
+  return `<svg viewBox="0 0 800 500" role="img" aria-label="公園風景"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC4F5"/><stop offset="1" stop-color="#DDF1FF"/></linearGradient></defs><rect width="800" height="500" fill="url(#sky)"/><circle cx="660" cy="90" r="48" fill="#FFD23F" stroke="#111" stroke-width="4"/><g fill="#fff" stroke="#111" stroke-width="3"><ellipse cx="150" cy="90" rx="70" ry="28"/><ellipse cx="190" cy="78" rx="45" ry="30"/><ellipse cx="430" cy="130" rx="60" ry="22"/><ellipse cx="460" cy="118" rx="38" ry="26"/></g><polygon points="0,330 140,190 260,300 380,200 520,330" fill="#7FA66B" stroke="#111" stroke-width="4"/><polygon points="300,330 470,210 640,330" fill="#9BBE85" stroke="#111" stroke-width="4"/><rect y="320" width="800" height="180" fill="#5BAF4A"/><line x1="0" y1="320" x2="800" y2="320" stroke="#111" stroke-width="4"/><polygon points="330,500 470,500 430,320 370,320" fill="#9A9A9A" stroke="#111" stroke-width="4"/><g stroke="#fff" stroke-width="6" stroke-dasharray="26 22"><line x1="400" y1="340" x2="400" y2="500"/></g><g stroke="#111" stroke-width="4"><rect x="90" y="250" width="150" height="110" fill="#F4C7A1"/><polygon points="80,252 165,185 250,252" fill="#C2452D"/><rect x="150" y="300" width="36" height="60" fill="#7A4A2A"/><rect x="105" y="275" width="34" height="30" fill="#8FD3FF"/><rect x="196" y="275" width="34" height="30" fill="#8FD3FF"/></g><g stroke="#111" stroke-width="4"><rect x="606" y="300" width="28" height="90" fill="#7A4A2A"/><circle cx="620" cy="255" r="62" fill="#2E8B57"/><circle cx="580" cy="290" r="40" fill="#3BA55D"/><circle cx="662" cy="290" r="40" fill="#3BA55D"/></g><g><rect x="700" y="330" width="10" height="70" fill="#6B4F2A"/><rect x="668" y="316" width="74" height="30" rx="4" fill="#FFF" stroke="#111" stroke-width="3"/><text x="705" y="339" font-size="22" font-weight="900" text-anchor="middle" fill="#111" font-family="sans-serif">公園</text></g><g stroke="#111" stroke-width="2"><circle cx="120" cy="440" r="10" fill="#FF6B9A"/><circle cx="160" cy="455" r="9" fill="#FFD23F"/><circle cx="210" cy="438" r="10" fill="#FF6B9A"/><circle cx="560" cy="450" r="9" fill="#FFD23F"/><circle cx="520" cy="430" r="10" fill="#FF6B9A"/><circle cx="740" cy="455" r="9" fill="#FF6B9A"/></g><g stroke="#111" stroke-width="3"><circle cx="300" cy="400" r="16" fill="#F1C27D"/><rect x="286" y="416" width="28" height="40" rx="6" fill="#2F6FED"/><rect x="288" y="455" width="10" height="30" fill="#111"/><rect x="302" y="455" width="10" height="30" fill="#111"/><rect x="266" y="418" width="14" height="40" fill="#8B5A2B" transform="rotate(-15 273 418)"/></g></svg>`;
+}
+function showDisease(k) {
+  const d = DISEASES.find(x => x.k === k); const box = $('#scene'); box.innerHTML = '';
+  const wrap = el('div', 'scenewrap'); const inner = el('div'); inner.style.cssText = 'position:absolute;inset:0'; inner.innerHTML = sceneSVG(); wrap.appendChild(inner); const ov = el('div', 'ov'); wrap.appendChild(ov);
+  if (k === 'cataract') { inner.style.filter = 'blur(4px) contrast(.55) brightness(1.18) sepia(.65)'; ov.style.background = 'rgba(255,250,230,.35)'; }
+  if (k === 'glaucoma') { ov.style.background = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 16%, rgba(0,0,0,.75) 36%, #000 52%)'; }
+  if (k === 'macular') { ov.style.background = 'radial-gradient(ellipse 24% 26% at 50% 50%, #151515 0%, #151515 55%, rgba(21,21,21,.75) 75%, rgba(21,21,21,0) 100%)'; }
+  if (k === 'diabetic') { inner.style.filter = 'blur(1.6px) contrast(.9)'; const sp = [[18, 22, 6], [62, 30, 8], [40, 60, 5], [78, 66, 7], [28, 78, 6], [55, 14, 4], [88, 40, 5], [8, 55, 5]].map(([x, y, r]) => `radial-gradient(circle at ${x}% ${y}%, rgba(55,0,0,.95) 0, rgba(55,0,0,.95) ${r}%, rgba(55,0,0,0) ${r + 3}%)`); ov.style.background = sp.join(','); }
+  box.appendChild(wrap);
+  $('#dinfo').innerHTML = `<h3>${d.name}</h3><p><b>看出去：</b>${d.sign}</p><p><b>怎麼辦：</b>${d.act}</p>`;
+  document.querySelectorAll('#dseg button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+}
+DISEASES.forEach(d => { const b = el('button', '', d.name); b.dataset.k = d.k; b.onclick = () => showDisease(d.k); $('#dseg').appendChild(b); });
+showDisease('normal');
+
+/* ---------- 自我觀察清單 ---------- */
+const CHECKS = [
+  ['看報紙、藥袋要拿很遠或很近，換眼鏡也沒用'], ['看電視越坐越近，或覺得畫面霧霧的'], ['直線看起來彎彎的，或中間暗一塊', true], ['旁邊的東西常看不到、常撞到門框桌角'],
+  ['夜間開車或走路看不清楚、車燈很刺眼'], ['顏色變暗變黃，分不清藍色和黑色'], ['飛蚊突然變多、看到閃光', true], ['眼睛痛、紅、看燈有彩虹圈', true],
+  ['遮住一眼時，另一眼明顯看不清楚'], ['最近一年沒有做過眼科檢查']
+];
+const checks = $('#checks'); let onCount = 0, redOn = 0;
+CHECKS.forEach(([t, red]) => { const c = el('button', 'chk' + (red ? ' red' : ''), `<span class="box"></span><span>${t}</span>`); c.onclick = () => { c.classList.toggle('on'); const on = c.classList.contains('on'); c.querySelector('.box').textContent = on ? '✓' : ''; onCount += on ? 1 : -1; if (red) redOn += on ? 1 : -1; updateRes(); }; checks.appendChild(c); });
+function updateRes() {
+  const r = $('#chkres');
+  if (!onCount) r.textContent = '還沒有勾選。請大家想一想最近三個月的情形。';
+  else if (redOn) r.textContent = `勾了 ${onCount} 項，其中有紅框警訊：請盡快（最好今天）到眼科檢查。`;
+  else r.textContent = `勾了 ${onCount} 項：建議近期安排一次完整眼科檢查（視力、眼壓、散瞳眼底）。`;
+}
+
+/* ---------- 方格表 ---------- */
+function amslerSVG(type) {
+  const N = 20, C = 20, W = N * C, cx = W / 2, cy = W / 2; let lines = '';
+  const amp = (x, y) => { const d = Math.hypot(x - cx, y - cy); return 13 * Math.exp(-(d / 85) * (d / 85)); };
+  for (let i = 0; i <= N; i++) {
+    const p = i * C;
+    if (type !== 'wavy') { lines += `<line x1="${p}" y1="0" x2="${p}" y2="${W}"/><line x1="0" y1="${p}" x2="${W}" y2="${p}"/>`; continue; }
+    let dv = '', dh = '';
+    for (let t = 0; t <= W; t += 8) { const ox = amp(p, t) * Math.sin(t / 16), oy = amp(t, p) * Math.sin(t / 16 + 1); dv += (t ? 'L' : 'M') + (p + ox).toFixed(1) + ' ' + t + ' '; dh += (t ? 'L' : 'M') + t + ' ' + (p + oy).toFixed(1) + ' '; }
+    lines += `<path d="${dv}"/><path d="${dh}"/>`;
+  }
+  const grid = `<g fill="none" stroke="#111" stroke-width="1.6">${lines}</g><circle cx="${cx}" cy="${cy}" r="6" fill="#111"/>`;
+  let extra = ''; const u = type;
+  if (type === 'dark') extra = `<ellipse cx="${cx + 10}" cy="${cy - 6}" rx="62" ry="52" fill="#1a1a1a" opacity=".92" filter="url(#b1${u})"/>`;
+  if (type === 'missing') extra = `<rect x="${cx - 95}" y="${cy + 20}" width="110" height="95" rx="18" fill="#fff" filter="url(#b2${u})"/>`;
+  if (type === 'blur') extra = `<g clip-path="url(#c${u})"><rect width="${W}" height="${W}" fill="#fff"/><g filter="url(#b3${u})">${grid}</g></g>`;
+  return `<svg viewBox="0 0 ${W} ${W}" role="img" aria-label="方格表 ${type}"><defs><filter id="b1${u}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter><filter id="b2${u}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter><filter id="b3${u}"><feGaussianBlur stdDeviation="3.2"/></filter><clipPath id="c${u}"><circle cx="${cx}" cy="${cy}" r="88"/></clipPath></defs><rect width="${W}" height="${W}" fill="#fff"/>${grid}${extra}</svg>`;
+}
+$('#amsler').innerHTML = amslerSVG('normal');
+[['wavy', '線條彎曲'], ['dark', '有黑影'], ['missing', '缺一塊'], ['blur', '模糊']].forEach(([k, n]) => { const f = el('figure', '', amslerSVG(k) + `<figcaption>${n}</figcaption>`); $('#amabn').appendChild(f); });
+})();
+</script>
+</body>
+</html>
