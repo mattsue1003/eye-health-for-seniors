@@ -116,8 +116,22 @@ h2.title{font-size:clamp(30px,4.2vw,58px); margin-bottom:16px}
 .dark .chkres{box-shadow:5px 5px 0 #fff}
 
 /* disease viewer */
-.scenewrap{position:relative; width:100%; aspect-ratio:8/5; border-radius:var(--radius); overflow:hidden; border:var(--b3); box-shadow:var(--sh7); background:#000}
-.scenewrap svg{position:absolute; inset:0; width:100%; height:100%}
+.scenewrap{position:relative; width:100%; aspect-ratio:1023/572; border-radius:var(--radius); overflow:hidden; border:var(--b3); box-shadow:var(--sh7); background:#000}
+.scenewrap .layer{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.segs{display:flex; flex-wrap:wrap; align-items:center; gap:6px 18px; margin:14px 0}
+.segs .seg{margin:0}
+.segs .lbl{font-weight:900; font-size:.95rem; color:var(--grey); margin-right:2px}
+.seg.lv button.on{background:var(--orange); color:#fff}
+.seg.off{opacity:.35; pointer-events:none}
+/* 第 6 頁：圖依可用高度縮放，整頁不超出一個螢幕 */
+#s6{padding-bottom:3vh}
+#s6 .kicker{margin-bottom:10px}
+#s6 .title{margin-bottom:8px}
+#s6 .segs{margin:10px 0}
+#s6 .scenewrap{width:min(100%, calc((100svh - 420px) * 1.788)); margin:0 auto}
+#s6 .title{font-size:clamp(28px,3.6vw,50px)}
+#s6 .lead{font-size:clamp(17px,1.3vw,21px)}
+#s6 .dinfo p{font-size:.95rem}
 .scenewrap .ov{position:absolute; inset:0; pointer-events:none}
 .seg{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0}
 .seg button{border:var(--b2); border-radius:999px; background:#fff; padding:8px 16px; font-weight:900; font-size:.95rem; box-shadow:var(--sh3)}
@@ -254,13 +268,13 @@ h2.title{font-size:clamp(30px,4.2vw,58px); margin-bottom:16px}
   <div class="wrap">
     <span class="kicker"><span class="n">2</span>看出去的樣子</span>
     <h2 class="title">四種常見眼疾，<span class="mark">世界會變成什麼樣</span>？</h2>
-    <p class="lead">點一下按鈕，看看同一座公園在不同眼睛裡的樣子（示意）。</p>
-    <div class="seg" id="dseg"></div>
+    <p class="lead">點按鈕看看同一條街，在不同眼疾、不同嚴重程度下會變成什麼樣子（示意）。</p>
+    <div class="segs"><div class="seg" id="dseg"></div><span class="lbl">程度</span><div class="seg lv" id="lvseg"></div></div>
     <div class="grid2">
       <div id="scene"></div>
       <div class="dinfo" id="dinfo"></div>
     </div>
-    <p class="src">內容依課程講義「眼睛顧好不吃虧」整理；畫面為示意，實際症狀因人而異。</p>
+    <p class="src">內容依課程講義「眼睛顧好不吃虧」整理；街景為 AI 生成的示意照片，眼疾效果為示意，實際症狀因人而異。</p>
   </div>
 </section>
 
@@ -458,6 +472,11 @@ h2.title{font-size:clamp(30px,4.2vw,58px); margin-bottom:16px}
   </div>
 </section>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="mwarp1"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="10"/></filter>
+  <filter id="mwarp2"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="22"/></filter>
+  <filter id="mwarp3"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="34"/></filter>
+</svg>
 <script>
 (() => {
 'use strict';
@@ -512,29 +531,53 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
 });
 
-/* ---------- 看出去的樣子 ---------- */
+/* ---------- 看出去的樣子（街景照片＋輕中重三級；與「護眼同樂會」遊戲同一套效果） ---------- */
 const DISEASES = [
-  { k: 'normal', name: '正常', sign: '看得清楚、顏色鮮明、直線是直的。', act: '繼續保持護眼好習慣，每 1～2 年檢查一次。' },
-  { k: 'cataract', name: '白內障', sign: '像隔著毛玻璃：視線霧霧、怕光、夜間車燈刺眼、顏色變黃變暗。', act: '九成以上因老化。初期先換眼鏡；影響生活時手術換人工水晶體（健保給付基本款）。眼藥水只能延緩，不能治好。' },
-  { k: 'glaucoma', name: '青光眼', sign: '視野像隧道：周邊慢慢縮小，早期常常沒有症狀。', act: '與眼壓高、高度近視、家族史有關。40 歲後每年量眼壓；已缺損的視野無法恢復，所以要早發現、按時點藥。' },
-  { k: 'macular', name: '黃斑部病變', sign: '中間看不見：直線變彎、中心有黑影或空白、看字困難，周邊仍正常。', act: '55 歲以上較多。用方格表自我檢查，有彎曲、黑影就盡快看眼科；濕性可用眼內注射治療，需持續回診。戒菸、均衡飲食。' },
-  { k: 'diabetic', name: '糖尿病視網膜病變', sign: '黑點遮眼：視力模糊、飛蚊變多、黑影，早期常沒有症狀。', act: '長期高血糖傷害視網膜血管。控制血糖血壓；每年散瞳眼底檢查；突然變暗要立刻就醫。' }
+  { k: 'normal', name: '正常', lv: ['', '', ''], sign: '看得清楚、顏色鮮明、直線是直的。', act: '繼續保持護眼好習慣，每 1～2 年檢查一次。' },
+  { k: 'cataract', name: '白內障', lv: ['輕度：有點霧、顏色稍微偏黃，常以為只是眼鏡髒了。', '中度：像隔著毛玻璃，怕光、晚上車燈很刺眼，看字吃力。', '重度：一片白霧，只看得到大概輪廓，生活和走路都受影響。'], sign: '像隔著毛玻璃：視線霧霧、怕光、夜間車燈刺眼、顏色變黃變暗。', act: '九成以上因老化。初期先換眼鏡；影響生活時手術換人工水晶體（健保給付基本款）。眼藥水只能延緩，不能治好。' },
+  { k: 'glaucoma', name: '青光眼', lv: ['輕度：旁邊稍微暗一點，自己幾乎沒感覺，最容易被忽略。', '中度：視野縮小，常撞到旁邊的東西、沒看到旁邊來的車。', '重度：只剩中間一小圈，像從管子往外看。'], sign: '視野像隧道：周邊慢慢縮小，早期常常沒有症狀。', act: '與眼壓高、高度近視、家族史有關。40 歲後每年量眼壓；已缺損的視野無法恢復，所以要早發現、按時點藥。' },
+  { k: 'macular', name: '黃斑部病變', lv: ['輕度：中間有點模糊、直線有點彎，看人臉和字變吃力。', '中度：中間一塊暗影，認不出對面的人是誰。', '重度：正中間看不見，只能用旁邊的餘光看東西。'], sign: '中間看不見：直線變彎、中心有黑影或空白、看字困難，周邊仍正常。', act: '55 歲以上較多。用方格表自我檢查，有彎曲、黑影就盡快看眼科；濕性可用眼內注射治療，需持續回診。戒菸、均衡飲食。' },
+  { k: 'diabetic', name: '糖尿病視網膜病變', lv: ['輕度：零星小黑點、有點模糊，常常沒症狀。', '中度：黑點、黑影變多，視力明顯模糊。', '重度：大片黑影遮住視線，可能出血，要立刻就醫。'], sign: '黑點遮眼：視力模糊、飛蚊變多、黑影，早期常沒有症狀。', act: '長期高血糖傷害視網膜血管。控制血糖血壓；每年散瞳眼底檢查；突然變暗要立刻就醫。' }
 ];
-function sceneSVG() {
-  return `<svg viewBox="0 0 800 500" role="img" aria-label="公園風景"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC4F5"/><stop offset="1" stop-color="#DDF1FF"/></linearGradient></defs><rect width="800" height="500" fill="url(#sky)"/><circle cx="660" cy="90" r="48" fill="#FFD23F" stroke="#111" stroke-width="4"/><g fill="#fff" stroke="#111" stroke-width="3"><ellipse cx="150" cy="90" rx="70" ry="28"/><ellipse cx="190" cy="78" rx="45" ry="30"/><ellipse cx="430" cy="130" rx="60" ry="22"/><ellipse cx="460" cy="118" rx="38" ry="26"/></g><polygon points="0,330 140,190 260,300 380,200 520,330" fill="#7FA66B" stroke="#111" stroke-width="4"/><polygon points="300,330 470,210 640,330" fill="#9BBE85" stroke="#111" stroke-width="4"/><rect y="320" width="800" height="180" fill="#5BAF4A"/><line x1="0" y1="320" x2="800" y2="320" stroke="#111" stroke-width="4"/><polygon points="330,500 470,500 430,320 370,320" fill="#9A9A9A" stroke="#111" stroke-width="4"/><g stroke="#fff" stroke-width="6" stroke-dasharray="26 22"><line x1="400" y1="340" x2="400" y2="500"/></g><g stroke="#111" stroke-width="4"><rect x="90" y="250" width="150" height="110" fill="#F4C7A1"/><polygon points="80,252 165,185 250,252" fill="#C2452D"/><rect x="150" y="300" width="36" height="60" fill="#7A4A2A"/><rect x="105" y="275" width="34" height="30" fill="#8FD3FF"/><rect x="196" y="275" width="34" height="30" fill="#8FD3FF"/></g><g stroke="#111" stroke-width="4"><rect x="606" y="300" width="28" height="90" fill="#7A4A2A"/><circle cx="620" cy="255" r="62" fill="#2E8B57"/><circle cx="580" cy="290" r="40" fill="#3BA55D"/><circle cx="662" cy="290" r="40" fill="#3BA55D"/></g><g><rect x="700" y="330" width="10" height="70" fill="#6B4F2A"/><rect x="668" y="316" width="74" height="30" rx="4" fill="#FFF" stroke="#111" stroke-width="3"/><text x="705" y="339" font-size="22" font-weight="900" text-anchor="middle" fill="#111" font-family="sans-serif">公園</text></g><g stroke="#111" stroke-width="2"><circle cx="120" cy="440" r="10" fill="#FF6B9A"/><circle cx="160" cy="455" r="9" fill="#FFD23F"/><circle cx="210" cy="438" r="10" fill="#FF6B9A"/><circle cx="560" cy="450" r="9" fill="#FFD23F"/><circle cx="520" cy="430" r="10" fill="#FF6B9A"/><circle cx="740" cy="455" r="9" fill="#FF6B9A"/></g><g stroke="#111" stroke-width="3"><circle cx="300" cy="400" r="16" fill="#F1C27D"/><rect x="286" y="416" width="28" height="40" rx="6" fill="#2F6FED"/><rect x="288" y="455" width="10" height="30" fill="#111"/><rect x="302" y="455" width="10" height="30" fill="#111"/><rect x="266" y="418" width="14" height="40" fill="#8B5A2B" transform="rotate(-15 273 418)"/></g></svg>`;
+const LV_NAME = ['', '輕度', '中度', '重度'];
+const STREET = 'img/street.jpg';
+const SPOTS = [[18, 30, 2.2], [62, 26, 2.6], [40, 64, 1.8], [78, 68, 2.4], [28, 80, 2], [55, 16, 1.6], [88, 42, 2], [10, 56, 1.8], [70, 48, 1.5], [34, 40, 2.2], [84, 20, 1.6], [48, 82, 2], [22, 14, 1.4], [92, 78, 2.2], [60, 72, 1.6], [14, 70, 2.4], [74, 34, 1.4], [44, 28, 1.8]].map(([x, y, r]) => ({ x, y, r }));
+let dCur = 'normal', dLv = 2;
+function diseaseView(k, lv) {
+  const wrap = el('div', 'scenewrap');
+  const base = el('img', 'layer'); base.src = STREET; base.alt = '街景：中間是揮手的小孫女，左邊有機車和水果攤，右邊有人騎腳踏車'; wrap.appendChild(base);
+  const ov = el('div', 'ov');
+  if (k === 'cataract') { const [b, sp, ct, br, hz] = [[1.2, .25, .9, 1.05, .15], [2.8, .5, .72, 1.1, .3], [5.5, .75, .5, 1.18, .48]][lv - 1]; base.style.filter = `blur(${b}px) sepia(${sp}) contrast(${ct}) brightness(${br})`; ov.style.background = `rgba(255,248,226,${hz})`; }
+  if (k === 'glaucoma') { const g = [['34%', 'rgba(0,0,0,.45) 58%', 'rgba(0,0,0,.82) 82%'], ['19%', 'rgba(0,0,0,.82) 37%', '#000 50%'], ['8%', 'rgba(0,0,0,.88) 17%', '#000 25%']][lv - 1]; ov.style.background = `radial-gradient(circle at 50% 55%, rgba(0,0,0,0) ${g[0]}, ${g[1]}, ${g[2]})`; if (lv === 3) base.style.filter = 'brightness(.9)'; }
+  if (k === 'macular') {
+    const warp = el('img', 'layer'); warp.src = STREET; warp.alt = ''; const R = [['16%', '26%'], ['24%', '38%'], ['32%', '50%']][lv - 1];
+    warp.style.filter = `url(#mwarp${lv}) blur(${[0.6, 1.2, 2][lv - 1]}px)`; warp.style.clipPath = `ellipse(${R[0]} ${R[1]} at 50% 55%)`; wrap.appendChild(warp);
+    // 用實色＋模糊（不用 opacity，部分瀏覽器和 blur 一起用會不顯示）
+    const [w, h, col, bl] = [[18, 32, '#3a3a3a', 10], [27, 48, '#161616', 15], [42, 74, '#0b0b0b', 19]][lv - 1];
+    const spot = el('div'); spot.style.cssText = `position:absolute; left:${50 - w / 2}%; top:${57 - h / 2}%; width:${w}%; height:${h}%; border-radius:50%; background:${col}; filter:blur(${bl}px); pointer-events:none`; ov.appendChild(spot);
+  }
+  if (k === 'diabetic') {
+    const use = SPOTS.slice(0, [5, 10, 18][lv - 1]); const mul = [1, 1.45, 2.1][lv - 1];
+    base.style.filter = `blur(${[0.5, 1.2, 2.4][lv - 1]}px) contrast(.92) brightness(${[1, .95, .85][lv - 1]})`;
+    const g = use.map(p => `radial-gradient(circle at ${p.x}% ${p.y}%, rgba(58,8,8,.94) 0, rgba(58,8,8,.94) ${(p.r * mul).toFixed(1)}%, rgba(58,8,8,0) ${(p.r * mul + 2.4).toFixed(1)}%)`);
+    if (lv >= 2) g.push('radial-gradient(ellipse 22% 18% at 64% 38%, rgba(40,0,0,.5) 0, rgba(40,0,0,0) 70%)');
+    if (lv === 3) g.push('radial-gradient(ellipse 30% 26% at 30% 62%, rgba(25,0,0,.75) 0, rgba(25,0,0,0) 72%)');
+    ov.style.background = g.join(',');
+  }
+  wrap.appendChild(ov); return wrap;
 }
-function showDisease(k) {
-  const d = DISEASES.find(x => x.k === k); const box = $('#scene'); box.innerHTML = '';
-  const wrap = el('div', 'scenewrap'); const inner = el('div'); inner.style.cssText = 'position:absolute;inset:0'; inner.innerHTML = sceneSVG(); wrap.appendChild(inner); const ov = el('div', 'ov'); wrap.appendChild(ov);
-  if (k === 'cataract') { inner.style.filter = 'blur(4px) contrast(.55) brightness(1.18) sepia(.65)'; ov.style.background = 'rgba(255,250,230,.35)'; }
-  if (k === 'glaucoma') { ov.style.background = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 16%, rgba(0,0,0,.75) 36%, #000 52%)'; }
-  if (k === 'macular') { ov.style.background = 'radial-gradient(ellipse 24% 26% at 50% 50%, #151515 0%, #151515 55%, rgba(21,21,21,.75) 75%, rgba(21,21,21,0) 100%)'; }
-  if (k === 'diabetic') { inner.style.filter = 'blur(1.6px) contrast(.9)'; const sp = [[18, 22, 6], [62, 30, 8], [40, 60, 5], [78, 66, 7], [28, 78, 6], [55, 14, 4], [88, 40, 5], [8, 55, 5]].map(([x, y, r]) => `radial-gradient(circle at ${x}% ${y}%, rgba(55,0,0,.95) 0, rgba(55,0,0,.95) ${r}%, rgba(55,0,0,0) ${r + 3}%)`); ov.style.background = sp.join(','); }
-  box.appendChild(wrap);
-  $('#dinfo').innerHTML = `<h3>${d.name}</h3><p><b>看出去：</b>${d.sign}</p><p><b>怎麼辦：</b>${d.act}</p>`;
-  document.querySelectorAll('#dseg button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+function showDisease(k, lv) {
+  if (k) dCur = k; if (lv) dLv = lv;
+  const d = DISEASES.find(x => x.k === dCur); const box = $('#scene'); box.innerHTML = '';
+  box.appendChild(diseaseView(dCur, dLv));
+  const isN = dCur === 'normal';
+  $('#dinfo').innerHTML = `<h3>${d.name}${isN ? '' : `（${LV_NAME[dLv]}）`}</h3>${isN ? '' : `<p><b>${d.lv[dLv - 1]}</b></p>`}<p><b>看出去：</b>${d.sign}</p><p><b>怎麼辦：</b>${d.act}</p>`;
+  document.querySelectorAll('#dseg button').forEach(b => b.classList.toggle('on', b.dataset.k === dCur));
+  document.querySelectorAll('#lvseg button').forEach(b => b.classList.toggle('on', +b.dataset.lv === dLv));
+  $('#lvseg').classList.toggle('off', isN);
 }
 DISEASES.forEach(d => { const b = el('button', '', d.name); b.dataset.k = d.k; b.onclick = () => showDisease(d.k); $('#dseg').appendChild(b); });
+[1, 2, 3].forEach(l => { const b = el('button', '', LV_NAME[l]); b.dataset.lv = l; b.onclick = () => showDisease(null, l); $('#lvseg').appendChild(b); });
 showDisease('normal');
 
 /* ---------- 自我觀察清單 ---------- */
